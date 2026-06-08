@@ -8,30 +8,31 @@ public class Longestsubstring {
 
         HashMap<Character, Integer> map = new HashMap<>();
 
-        int l = 0;
-        int max = 0;
+        int left = 0;
+        int maxLen = 0;
 
-        for (int r = 0; r < s.length(); r++) {
+        for (int right = 0; right < s.length(); right++) {
 
-            char curr = s.charAt(r);
+            char ch = s.charAt(right);
 
-            map.put(curr, map.getOrDefault(curr, 0) + 1);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
 
             while (map.size() > k) {
 
-                if (map.get(s.charAt(l)) == 1) {
-                    map.remove(s.charAt(l));
-                } else {
-                    map.put(s.charAt(l),
-                            map.get(s.charAt(l)) - 1);
+                char leftChar = s.charAt(left);
+
+                map.put(leftChar, map.get(leftChar) - 1);
+
+                if (map.get(leftChar) == 0) {
+                    map.remove(leftChar);
                 }
 
-                l++;
+                left++;
             }
 
-            max = Math.max(max, r - l + 1);
+            maxLen = Math.max(maxLen, right - left + 1);
         }
 
-        System.out.println(max);
+        System.out.println("Longest Length = " + maxLen);
     }
 }
